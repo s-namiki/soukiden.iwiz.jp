@@ -1,1 +1,0 @@
-# soukiden.iwiz.jp
