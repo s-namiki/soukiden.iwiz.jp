@@ -2,130 +2,231 @@
 
 body {
 	background-color: #000000;
+	background-image: url("index_bg.png");
+	background-repeat: repeat;
+	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+	margin: 0;
+	padding: 20px 0;
+	color: #333;
 }
-div.box, main.box {
+
+main.box {
 	margin: 0 auto;
 	width: 320px;
+	/* Add a shadow if we want to separate it, but the sprites are shaped, so a box shadow might look weird around the rect. 
+	   Let's keep it clean for now. */
 }
+
+header {
+	margin-bottom: 20px;
+}
+
 div.title {
 	text-align: center;
 }
+
+div.title img {
+	max-width: 100%;
+	height: auto;
+}
+
 div.gamecap {
 	text-align: center;
 	width: 320px;
-	height: 400px;
+	/* height: 400px; removed rigid height to allow flex if image changes */
 }
+
+div.gamecap img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Sprite Container Logic 
+   The original sprite has fixed dimensions.
+   bg-pos: 
+    Top: 0 0 (100px h)
+    Mid: 0 -90px (144px h)
+    Bot: 0 -230px (90px h)
+*/
+
+.csssprite {
+	background-image: url("win01.png");
+	background-repeat: no-repeat;
+	display: block;
+	width: 320px;
+	/* Reset text properties that might hide content */
+	text-indent: 0;
+	white-space: normal;
+	overflow: visible;
+}
+
+/* Specifics for the frame parts */
+#window_top {
+	background-position: 0 0;
+	height: 100px;
+	/* If this is empty, we can hide text inside if any */
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+#window_mid {
+	background-position: 0 -90px;
+	height: 144px;
+	width: 320px;
+	padding: 0 40px;
+	box-sizing: border-box;
+	overflow: hidden;
+	/* Center content vertically if needed, or let it flow */
+}
+
+#window_buttom {
+	background-position: 0 -230px;
+	height: 90px;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+
+/* Text Typography within windows */
 
 .textlead {
 	color: #000;
 	text-align: center;
-	font-size: 18px;
-	white-space: normal;
-	text-indent: 0px;
-	font-weight: bolder;
-	text-shadow: 2px 2px 4px #aaa;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	font-weight: 700;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	margin-bottom: 1rem;
 }
+
 .textbox {
 	margin: 0 auto;
-	width: 240px;
+	/* width: 240px;  Let's allow it to fill the padded container */
+	width: 100%;
 	text-align: center;
 }
+
 .linkbox {
 	margin: 0 auto;
 	width: 280px;
 	text-align: center;
-}
-.text {
-	color: #000000;
-	font-size: 14px;
-	text-align: center;
-	white-space: normal;
-	font-weight: bold;
-	text-indent: 0px;
-}
-.textbunner {
-	color: #000000;
-	font-size: 14px;
-	text-align: center;
-	white-space: normal;
-	font-weight: bold;
-	text-indent: 0px;
-}
-.textsupport {
-	color: #000000;
-	font-size: 14px;
-	text-align: left;
-	white-space: normal;
-	font-weight: bold;
-	text-indent: 0px;
+	margin-bottom: 10px;
 }
 
-.linkstore {
+.text,
+.textbunner {
+	color: #222;
+	font-size: 0.9rem;
+	line-height: 1.6;
 	text-align: center;
-	white-space: normal;
-	text-indent: 0px;
+	font-weight: bold;
 }
+
+.textsupport {
+	color: #222;
+	font-size: 0.9rem;
+	line-height: 1.6;
+	text-align: left;
+	font-weight: bold;
+}
+
+/* Links */
+a {
+	color: #0056b3;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+}
+
+a:hover {
+	opacity: 0.7;
+	text-decoration: underline;
+}
+
+.linkstore img {
+	transition: transform 0.2s;
+}
+
+.linkstore img:hover {
+	transform: scale(1.05);
+}
+
 .social {
 	text-align: center;
-	white-space: normal;
-	text-indent: 0px;
+	margin-top: 10px;
 }
 
-.csssprite {
-	background-image: url(win01.png);
-	background-repeat: no-repeat;
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	display: block;
-}
-#window_top {
-	background-position: -0px -0px;
-	width: 320px;
-	height: 100px;
-}
-#window_mid {
-	background-position: -0px -90px;
-	width: 320px;
-	height: 144px;
-}
-#window_buttom {
-	background-position: -0px -230px;
-	width: 320px;
-	height: 90px;
-}
-div.copyright, footer.copyright {
+footer.copyright {
 	text-align: center;
-	color: #ffffff;
-	font-size: 12px;
+	color: #eeeeee;
+	font-size: 0.8rem;
+	margin-top: 20px;
+	opacity: 0.8;
 }
 
-ul {
-	margin: 0 0 0 1.5em;
-	padding: 0;
-}
-
-/* Utility classes to replace inline styles */
+/* Utilities */
 .list-none-w75 {
 	list-style-type: none;
 	width: 75px;
+	margin: 0 auto;
+	/* Center it */
 }
+
 .list-none {
 	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
+
 .disc-list {
 	list-style-type: disc;
+	padding-left: 20px;
+	margin-left: 10px;
 }
+
 .text-small-blue {
-	font-size: x-small;
+	font-size: 0.8em;
 	color: #1010FF;
 }
+
 .border-none {
 	border: none;
 }
+
 .fb-iframe {
 	border: none;
 	overflow: hidden;
 	width: 100px;
 	height: 20px;
+}
+
+/* Responsive tweaks for larger screens? 
+   If user wants "modern", maybe we scale up the whole 320px interface?
+   Or just let it sit in the center.
+   Let's add a transform scale for very large screens? No, that might be blurry.
+   Let's just keep it centered.
+*/
+
+.window-container {
+	margin-bottom: 30px;
+}
+
+.video-container {
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.social {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	flex-wrap: wrap;
+	margin: 30px auto;
+}
+
+/* Mail icon styling: Use text variation in HTML to allow coloring */
+.mail-icon {
+	color: #e67e22;
+	font-weight: bold;
+	margin-right: 2px;
 }
